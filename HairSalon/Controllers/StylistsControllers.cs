@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
 using System.Collections.Generic;
+using System;
 
 namespace HairSalon.Controllers
 {
@@ -33,10 +34,10 @@ namespace HairSalon.Controllers
 
     [HttpGet("/stylists/{id}")]
     [HttpPost("/stylists/{id}")]
-    public ActionResult Details(int stylistId)
+    public ActionResult Details(int id)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
-      Stylist selectedStylist = Stylist.Find(stylistId);
+      Stylist selectedStylist = Stylist.Find(id);
       List<Client> stylistClients = selectedStylist.GetClients();
       model.Add("stylists", selectedStylist);
       model.Add("clients", stylistClients);
@@ -44,11 +45,11 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/stylists/{id}/clients")]
-    public ActionResult CreateClient(int stylistId, string newClientName) //from create client form
+    public ActionResult CreateClient(int id, string newClientName) //from create client form
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
-      Stylist foundStylist = Stylist.Find(stylistId);
-      Client newClient = new Client(newClientName, stylistId);
+      Stylist foundStylist = Stylist.Find(id);
+      Client newClient = new Client(newClientName, id);
       newClient.Save();
       foundStylist.AddClient(newClient);
       List<Client> stylistClients = foundStylist.GetClients();

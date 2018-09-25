@@ -14,10 +14,10 @@ namespace HairSalon.Controllers
     }
 
     [HttpGet("/stylists/{id}/clients/new")]
-    public ActionResult CreateForm(int stylistId)
+    public ActionResult CreateForm(int id)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
-      Stylist stylist = Stylist.Find(stylistId);
+      Stylist stylist = Stylist.Find(id);
       return View(stylist);
     }
   }
