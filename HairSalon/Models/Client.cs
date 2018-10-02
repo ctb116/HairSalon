@@ -120,6 +120,22 @@ namespace HairSalon.Models
       return foundClient;
     }
 
+    public static void Truncate()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"TRUNCATE clients;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
 
   }
 }
