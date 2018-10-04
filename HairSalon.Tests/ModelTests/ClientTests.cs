@@ -20,7 +20,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void GetAll_ReturnClientsInList_True()
     {
-      Client newClient = new Client("Bane");
+      Client newClient = new Client("Bane", 1);
       newClient.Save();
 
       int result = Client.GetAll().Count;
